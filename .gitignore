@@ -1,0 +1,23 @@
+# Secrets
+.env
+
+# Data files (too big for git, easy to leak PII)
+data/raw/*.csv
+data/raw/*.xlsx
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Mac
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Docker volumes (just in case)
+mysql_data/
