@@ -3,26 +3,10 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from sqlalchemy import create_engine, text
+from db import get_engine, run_query
 
 st.set_page_config(page_title="FMCG Category Analytics", page_icon="📊", layout="wide")
 
-@st.cache_resource
-def get_engine():
-    user = os.getenv("MYSQL_USER")
-    pw   = os.getenv("MYSQL_PASSWORD")
-    host = os.getenv("MYSQL_HOST", "mysql")
-    port = os.getenv("MYSQL_PORT", "3306")
-    db   = os.getenv("MYSQL_DATABASE")
-    return create_engine(f"mysql+pymysql://{user}:{pw}@{host}:{port}/{db}",
-    pool_pre_ping = True,
-    pool_recycle=3600,
-    pool_size=5,
-    max_overflow=10)
-
-@st.cache_data(ttl=300)
-def run_query(_engine, query):
-    with _engine.connect() as conn:
-        return pd.read_sql(text(query), conn)
 
 st.title("📊 FMCG Multi-Country Category Analytics")
 st.markdown("""

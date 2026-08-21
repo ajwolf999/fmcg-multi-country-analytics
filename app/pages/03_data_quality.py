@@ -3,32 +3,10 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 from sqlalchemy import create_engine, text
-
-@st.cache_resource
-def get_engine():
-    user = os.getenv("MYSQL_USER")
-    pw   = os.getenv("MYSQL_PASSWORD")
-    host = os.getenv("MYSQL_HOST", "mysql")
-    port = os.getenv("MYSQL_PORT", "3306")
-    db   = os.getenv("MYSQL_DATABASE")
-    return create_engine(
-        f"mysql+pymysql://{user}:{pw}@{host}:{port}/{db}",
-        pool_pre_ping=True,
-        pool_recycle=3600,
-        pool_size=5,
-        max_overflow=10
-    )
-
-@st.cache_data(ttl=300)
-def run_query(_engine, query):
-    with _engine.connect() as conn:
-        return pd.read_sql(text(query), conn)
-
-st.set_page_config(
-    page_title="Data Quality",
-    page_icon="🔬",
-    layout="wide"
-)
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
+from db import get_engine, run_query
 
 st.title("🔬 Data Quality Report")
 st.markdown("""
