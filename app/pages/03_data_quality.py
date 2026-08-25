@@ -126,7 +126,7 @@ def highlight_result(val):
     return f"background-color: {color}"
 
 st.dataframe(
-    df_quality.style.applymap(highlight_result, subset=["Result"]),
+    df_quality.style.map(highlight_result, subset=["Result"]),
     use_container_width=True,
     hide_index=True
 )
