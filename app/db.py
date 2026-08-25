@@ -20,10 +20,7 @@ def get_engine():
    """
    sqlite_path = Path(__file__).parent / "fmcg.db"
 
-   st.write(f"DEBUG: looking for SQLite at: {sqlite_path}")
-   st.write(f"DEBUG: File exists: {sqlite_path.exists()}")
-   st.write(f"DEBUG:__file__is: {__file__}")
-
+   
    if sqlite_path.exists():
         return create_engine(f"sqlite:///{sqlite_path}")
    else:
@@ -45,3 +42,4 @@ def get_engine():
 def run_query(_engine,query):
     with _engine.connect() as conn:
         return pd.read_sql(text(query),conn)
+
