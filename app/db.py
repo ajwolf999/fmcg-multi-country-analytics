@@ -11,17 +11,22 @@ import streamlit as st
 import pandas as pd
 from sqlalchemy import create_engine, text
 
-def is_cloud() -> bool:
-    """ Return True if running in Streamlit Community Cloud."""
-    return os.getenv("STREAMLIT_SHARING_MODE") is not None
 
 @st.cache_resource
 def get_engine():
-    if is_cloud():
-        # SQLite for cloud deployment
-        db_path = Path(__file__).parent / "fmcg.db"
-        return create_engine(f"sqlite:///{db_path}")
-    else:
+   """
+   Use SQLite if fmcg.db exists alongside this file.
+    Otherwise fall back to MySQL via environment variables.
+   """
+   sqlite_path = Path(__file__).parent / "fmcg.db"
+
+   st.write(f"DEBUG: looking for SQLite at: {sqlite_path}")
+   st.write(f"DEBUG: File exists: {sqlite_path.exists()}")
+   st.write(f"DEBUG:__file__is: {__file__}")
+
+   if sqlite_path.exists():
+        return create_engine(f"sqlite:///{sqlite_path}")
+   else:
         # MySQL for local Docker Development
         user = os.getenv("MYSQL_USER")
         pw = os.getenv("MYSQL_PASSWORD")
