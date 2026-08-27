@@ -2,7 +2,7 @@
 
 > End-to-end analytics pipeline analyzing 1.1M FMCG sales transactions across 7 European countries — from raw data ingestion through star schema modeling to a live interactive dashboard. Quantifies promotional effectiveness, seasonal patterns, and stockout revenue impact to inform category management decisions.
 
-🔗 **[Live Dashboard](https://ajwolf999-fmcg-multi-country-analytics.streamlit.app)** &nbsp;|&nbsp; 💻 **[GitHub Repo](https://github.com/ajwolf999/fmcg-multi-country-analytics)**
+🔗 **[Live Dashboard](https://fmcg-multi-country-analytics-europe.streamlit.app/)** &nbsp;|&nbsp; 💻 **[GitHub Repo](https://github.com/ajwolf999/fmcg-multi-country-analytics)**
 
 ---
 
